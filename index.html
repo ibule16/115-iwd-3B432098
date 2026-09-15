@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人介紹</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #42312d;
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            color: #ffffff;
+            padding: 60px;
+        }
+
+        /* 主容器改成區塊流動，適應更多內容 */
+        .wrapper {
+            width: 1000px;
+            max-width: 100%;
+            background-color: rgba(20, 20, 20, 0.72);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); 
+            backdrop-filter: blur(8px);
+        }
+
+        /* 導覽列 */
+        nav {
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #2135e9;
+        }
+
+        /* 個人介紹主區塊 */
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .photo-area {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background-color: #abb1e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 6px solid #2135e9;
+            position: relative;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+        }
+
+        .photo-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .info {
+            width: 60%;
+            padding-left: 40px;
+        }
+
+        .name {
+            font-size: 38px;
+            margin: 0 0 10px 0;
+        }
+
+        .title {
+            font-size: 20px;
+            margin: 0 0 20px 0;
+            font-weight: bold;
+        }
+
+        .line {
+            width: 80px;
+            height: 5px;
+            background-color: #2135e9;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* 聯絡我表單區塊 */
+        .contact-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 30px;
+        }
+
+        .contact-section h2 {
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2135e9;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            background-color: #2135e9;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            align-self: flex-start;
+        }
+
+        .submit-btn:hover {
+            background-color: #1827b5;
+        }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        /* 響應式調整 (RWD) */
+        @media (max-width: 768px) {
+            .wrapper {
+                padding: 25px 20px;
+            }
+
+            .profile {
+                flex-direction: column;
+                margin-bottom: 30px;
+            }
+
+            .photo-area {
+                width: 100%;
+                margin-bottom: 25px;
+            }
+
+            .photo {
+                width: 180px;
+                height: 180px;
+            }
+
+            .info {
+                width: 100%;
+                padding-left: 0;
+                text-align: center;
+            }
+
+            .name {
+                font-size: 30px;
+            }
+
+            .title {
+                font-size: 18px;
+            }
+
+            .line {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .intro {
+                font-size: 15px;
+                text-align: left;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- 導覽列 -->
+        <nav>
+            <ul>
+                <li><a href="#about">關於我</a></li>
+                <li><a href="#contact">聯絡我</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- 個人介紹主區塊 -->
+            <article class="profile" id="about">
+                <header class="photo-area">
+                    <div class="photo">
+                        <img src="MyFace.png" alt="個人相片" onerror="this.style.display='none';">
+                        <div class="photo-text">avatar</div>
+                    </div>
+                </header>
+
+                <div class="info">
+                    <h1 class="name">李翊甄</h1>
+                    <p class="title">資訊管理系學生</p>
+                    <div class="line"></div>
+                    <p class="intro">
+                        您好，我是翊甄。目前就讀資訊管理相關科系，
+                        對程式設計、網站開發以及資訊科技有興趣。
+                        在學習的過程中，我喜歡自己動手實作，
+                        透過不同的專題與作品累積經驗。
+                        希望未來能持續學習新的技術，
+                        將自己的想法轉化成實際的作品。
+                    </p>
+                </div>
+            </article>
+
+            <!-- 聯絡我表單區塊 -->
+            <section class="contact-section" id="contact">
+                <h2>聯絡我</h2>
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">姓名 <span style="color: #ff6b6b;">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="請輸入您的姓名">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email <span style="color: #ff6b6b;">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="請輸入您的電子郵件">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">訊息內容</label>
+                        <textarea id="message" name="message" rows="4" placeholder="請輸入您想說的話..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">送出訊息</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- 頁尾 -->
+        <footer>
+            <p>&copy; 2026 李翊甄. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
