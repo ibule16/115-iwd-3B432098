@@ -55,6 +55,8 @@
                     <div class="form-group">
                         <label for="email">Email <span style="color: #ff6b6b;">*</span></label>
                         <input type="email" id="email" name="email" required placeholder="請輸入您的電子郵件">
+                        <!-- Email 即時驗證錯誤提示 -->
+                        <span id="email-error" class="error-msg" style="display: none;">請輸入有效的 Email 格式（例如: name@example.com）</span>
                     </div>
 
                     <div class="form-group">
@@ -73,5 +75,75 @@
         </footer>
     </div>
 
+    <!-- JavaScript 互動邏輯 -->
+    <script>
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const emailError = document.getElementById('email-error');
+        const contactForm = document.querySelector('.contact-form');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        // Email 格式驗證正規表達式
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // 即時驗證 Email 輸入
+        emailInput.addEventListener('input', function() {
+            const value = emailInput.value.trim();
+            if (value === '') {
+                emailError.style.display = 'none';
+                emailInput.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            } else if (!emailRegex.test(value)) {
+                emailError.style.display = 'block';
+                emailInput.style.borderColor = '#ff6b6b';
+            } else {
+                emailError.style.display = 'none';
+                emailInput.style.borderColor = '#2135e9';
+            }
+        });
+
+        // 按鈕點擊後改變文字與背景顏色，並將輸入框變灰色
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // 阻止表單預設送出重新整理
+
+            // 再次檢查 Email 是否正確
+            if (!emailRegex.test(emailInput.value.trim())) {
+                emailError.style.display = 'block';
+                emailInput.style.borderColor = '#ff6b6b';
+                return;
+            }
+
+            // 改變按鈕樣式與文字
+            submitBtn.textContent = '已送出';
+            submitBtn.classList.add('submitted');
+            submitBtn.disabled = true;
+
+            // 將所有輸入框加入 disabled 與灰色樣式
+            nameInput.disabled = true;
+            emailInput.disabled = true;
+            messageInput.disabled = true;
+            nameInput.classList.add('disabled-input');
+            emailInput.classList.add('disabled-input');
+            messageInput.classList.add('disabled-input');
+
+            // 模擬送出後，2秒恢復原狀
+            setTimeout(() => {
+                submitBtn.textContent = '送出訊息';
+                submitBtn.classList.remove('submitted');
+                submitBtn.disabled = false;
+
+                // 恢復輸入框狀態
+                nameInput.disabled = false;
+                emailInput.disabled = false;
+                messageInput.disabled = false;
+                nameInput.classList.remove('disabled-input');
+                emailInput.classList.remove('disabled-input');
+                messageInput.classList.remove('disabled-input');
+
+                contactForm.reset();
+                emailInput.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
