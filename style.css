@@ -251,3 +251,25 @@ padding: 20px;
 
 
 }
+
+/* Email 錯誤提示文字樣式 */
+.error-msg {
+    color: #ff6b6b;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+/* 按鈕送出後的灰色樣式 */
+.submit-btn.submitted {
+    background-color: #6c757d !important;
+    cursor: not-allowed;
+}
+
+/* 輸入框送出後的灰色與鎖定樣式 */
+.form-group input.disabled-input,
+.form-group textarea.disabled-input {
+    background-color: rgba(108, 117, 125, 0.3) !important;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.1);
+}
